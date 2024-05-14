@@ -7,6 +7,6 @@ public class VideoNotFoundException extends CulturemediaException {
 
 
 public VideoNotFoundException(String title){
-    super("Video with title " + title + " not found");
+    super("Video with title " + title + " is invalid. Please enter a valid title.");
 }  
 }
