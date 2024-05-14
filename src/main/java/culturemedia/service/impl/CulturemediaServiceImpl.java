@@ -23,7 +23,7 @@ public class CulturemediaServiceImpl implements CulturemediaService {
     public List<Video> findAll() throws VideoNotFoundException {
         List<Video> videos = videoRepository.findAll();
         if (videos.isEmpty()) {
-            throw new VideoNotFoundException("No videos found");
+            throw new VideoNotFoundException("No videos found at this time.");
         }
         return videos;
     }
