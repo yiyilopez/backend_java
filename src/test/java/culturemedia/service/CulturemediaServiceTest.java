@@ -14,7 +14,9 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class CulturemediaServiceTest {
     private VideoRepository videoRepository;
@@ -22,26 +24,27 @@ class CulturemediaServiceTest {
     private CulturemediaService culturemediaService;
       private List<Video> videos;
 
-    @BeforeEach
-    void setUp() {
-        videoRepository = mock(VideoRepository.class);
-        viewsRepository = mock(ViewsRepository.class);
-        culturemediaService = new CulturemediaServiceImpl(videoRepository, viewsRepository);
-    }
+      @BeforeEach
+      void setUp() {
+          videoRepository = mock(VideoRepository.class);
+          viewsRepository = mock(ViewsRepository.class);
+          culturemediaService = new CulturemediaServiceImpl(videoRepository, viewsRepository);
+          videos = List.of(
+                  new Video("01", "Título 1", "Descripción 1", 4.5),
+                  new Video("02", "Título 2", "Descripción 2", 5.5),
+                  new Video("03", "Título 3", "Descripción 3", 3.0)
+          );
+      }
 
-    @Test
-    void when_FindAll_all_videos_should_be_returned_successfully() throws VideoNotFoundException {
-        List<Video> videos = List.of(
-                new Video("01", "Título 1", "Descripción 1", 4.5),
-                new Video("02", "Título 2", "Descripción 2", 5.5)
-        );
-        when(videoRepository.findAll()).thenReturn(videos);
-
-        List<Video> result = culturemediaService.findAll();
-
-        assertEquals(2, result.size());
-        assertEquals(videos, result);
-    }
+      @Test
+      void whenFindAllAllVideosShouldBeReturnedSuccessfully() throws VideoNotFoundException {
+          when(videoRepository.findAll()).thenReturn(videos);
+  
+          List<Video> result = culturemediaService.findAll();
+  
+          assertEquals(3, result.size());
+          assertEquals(videos, result);
+      }
     
     @Test
     void when_FindAll_does_not_find_any_video_an_VideoNotFoundException_should_be_thrown_successfully() throws VideoNotFoundException {
