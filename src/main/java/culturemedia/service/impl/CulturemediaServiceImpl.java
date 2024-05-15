@@ -22,12 +22,9 @@ public class CulturemediaServiceImpl implements CulturemediaService {
     }
 
     @Override
-    public List<Video> findAll() throws VideoNotFoundException {
+    public List<Video> findAll() {
         List<Video> videos = videoRepository.findAll();
-        if (videos.isEmpty()) {
-            throw new VideoNotFoundException("No videos found at this time.");
-        }
-        return videos;
+          return videos;
     }
 
     @Override
@@ -43,18 +40,12 @@ public class CulturemediaServiceImpl implements CulturemediaService {
     @Override
     public List<Video> findByTitle(String title) throws VideoNotFoundException {
         List<Video> videos = videoRepository.find(title);
-        if (videos.isEmpty()) {
-            throw new VideoNotFoundException("No videos found with title: " + title);
-        }
         return videos;
     }
 
     @Override
     public List<Video> findByDuration(Double fromDuration, Double toDuration) throws VideoNotFoundException {
         List<Video> videos = videoRepository.find(fromDuration, toDuration);
-        if (videos.isEmpty()) {
-            throw new VideoNotFoundException("No videos found with duration between: " + fromDuration + " and " + toDuration);
-        }
         return videos;
     }
 

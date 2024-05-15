@@ -5,8 +5,5 @@ public class CulturemediaException extends Exception{
         super(message);
 }
 
-public CulturemediaException(String message, Throwable cause) {
-    super(message, cause);
-}
 
 }
