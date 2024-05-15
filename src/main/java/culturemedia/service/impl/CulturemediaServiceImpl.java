@@ -37,23 +37,4 @@ public class CulturemediaServiceImpl implements CulturemediaService {
     public View addView(View view) {
         return viewsRepository.add(view);
     }
-
-    @Override
-    public List<Video> findByTitle(String title) throws VideoNotFoundException {
-        List<Video> videos = videoRepository.find(title);
-        if (videos.isEmpty()) {
-            throw new VideoNotFoundException("No videos found with title: " + title);
-        }
-        return videos;
-    }
-
-    @Override
-    public List<Video> findByDuration(Double fromDuration, Double toDuration) throws VideoNotFoundException {
-        List<Video> videos = videoRepository.find(fromDuration, toDuration);
-        if (videos.isEmpty()) {
-            throw new VideoNotFoundException("No videos found with duration between: " + fromDuration + " and " + toDuration);
-        }
-        return videos;
-    }
-
 }
