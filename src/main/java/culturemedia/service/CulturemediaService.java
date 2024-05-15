@@ -22,3 +22,5 @@ public interface CulturemediaService {
     List<Video> findByDuration(Double fromDuration, Double toDuration) throws VideoNotFoundException;   
 >>>>>>> 257c5cb2a5d801f4fa91f009ea7293723221f15b
 }
+
+//Así está bien
