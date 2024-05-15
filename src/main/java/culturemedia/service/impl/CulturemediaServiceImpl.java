@@ -6,10 +6,12 @@ import culturemedia.exception.VideoNotFoundException;
 import culturemedia.repository.VideoRepository;
 import culturemedia.repository.ViewsRepository;
 import culturemedia.service.CulturemediaService;
+import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 
-
+@Service
 public class CulturemediaServiceImpl implements CulturemediaService {
     private final VideoRepository videoRepository;
     private final ViewsRepository viewsRepository;

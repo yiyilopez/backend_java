@@ -4,12 +4,14 @@ import culturemedia.exception.VideoNotFoundException;
 import culturemedia.model.Video;
 import culturemedia.repository.VideoRepository;
 import java.util.stream.Collectors;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class VideoRepositoryImpl implements VideoRepository{
-    List<Video> videos = new ArrayList<>();
+    private final List<Video> videos = new ArrayList<>();
    
     @Override
     public List<Video> findAll() throws VideoNotFoundException {

@@ -22,7 +22,7 @@ class CulturemediaServiceTest {
     private VideoRepository videoRepository;
     private ViewsRepository viewsRepository;
     private CulturemediaService culturemediaService;
-      private List<Video> videos;
+    private List<Video> videos;
 
       @BeforeEach
       void setUp() {
@@ -46,14 +46,14 @@ class CulturemediaServiceTest {
           assertEquals(videos, result);
       }
     
-    @Test
-    void when_FindAll_does_not_find_any_video_an_VideoNotFoundException_should_be_thrown_successfully() throws VideoNotFoundException {
-        when(videoRepository.findAll()).thenReturn(List.of());
-
-        Executable executable = () -> culturemediaService.findAll();
-
-        assertThrows(VideoNotFoundException.class, executable);
-    } 
+      @Test
+      void when_FindAll_does_not_find_any_video_an_VideoNotFoundException_should_be_thrown_successfully() throws VideoNotFoundException {
+          when(videoRepository.findAll()).thenReturn(List.of());
+  
+          Executable executable = () -> culturemediaService.findAll();
+  
+          assertThrows(VideoNotFoundException.class, executable);
+      }
 
     @Test
     void find_by_title_video_exception() {
@@ -67,7 +67,7 @@ class CulturemediaServiceTest {
 
     @Test
     void find_by_title_video() throws VideoNotFoundException {
-        String parameter = "Video";
+        String parameter = "Título";
         List<Video> expected = videos.stream().filter(p -> p.title().contains(parameter)).toList();
         doReturn(expected).when(videoRepository).find(parameter);
 
@@ -75,12 +75,13 @@ class CulturemediaServiceTest {
         assertTrue(result.containsAll(expected));
     }
 
+
     @Test
     void find_by_duration_video() throws VideoNotFoundException {
-        List<Video> expected = videos.stream().filter(p -> p.duration() <= 5.0 && p.duration() >= 3.0).toList();
-        doReturn(expected).when(videoRepository).find(3.0, 5.0);
+        List<Video> expected = videos.stream().filter(p -> p.duration() <= 5.5 && p.duration() >= 3.0).toList();
+        doReturn(expected).when(videoRepository).find(3.0, 5.5);
 
-        List<Video> result = culturemediaService.findByDuration(3.0, 5.0);
+        List<Video> result = culturemediaService.findByDuration(3.0, 5.5);
         assertTrue(result.containsAll(expected));
     }
 
