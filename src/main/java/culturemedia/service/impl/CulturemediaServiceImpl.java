@@ -5,6 +5,8 @@ import culturemedia.model.View;
 import culturemedia.exception.VideoNotFoundException;
 import culturemedia.repository.VideoRepository;
 import culturemedia.repository.ViewsRepository;
+import culturemedia.repository.impl.VideoRepositoryImpl;
+import culturemedia.repository.impl.ViewsRepositoryImpl;
 import culturemedia.service.CulturemediaService;
 import org.springframework.stereotype.Service;
 
@@ -21,12 +23,14 @@ public class CulturemediaServiceImpl implements CulturemediaService {
         this.viewsRepository = viewsRepository;
     }
 
+        public CulturemediaServiceImpl(){
+        this.videoRepository = new VideoRepositoryImpl();
+        this.viewsRepository = new ViewsRepositoryImpl();
+    }
+
     @Override
-    public List<Video> findAll() throws VideoNotFoundException {
+    public List<Video> findAll(){
         List<Video> videos = videoRepository.findAll();
-        if (videos.isEmpty()) {
-            throw new VideoNotFoundException("No videos found at this time.");
-        }
         return videos;
     }
 
@@ -43,18 +47,13 @@ public class CulturemediaServiceImpl implements CulturemediaService {
     @Override
     public List<Video> findByTitle(String title) throws VideoNotFoundException {
         List<Video> videos = videoRepository.find(title);
-        if (videos.isEmpty()) {
-            throw new VideoNotFoundException("No videos found with title: " + title);
-        }
         return videos;
     }
 
     @Override
     public List<Video> findByDuration(Double fromDuration, Double toDuration) throws VideoNotFoundException {
         List<Video> videos = videoRepository.find(fromDuration, toDuration);
-        if (videos.isEmpty()) {
-            throw new VideoNotFoundException("No videos found with duration between: " + fromDuration + " and " + toDuration);
-        }
+
         return videos;
     }
 
