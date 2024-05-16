@@ -25,6 +25,9 @@ public class CultureMediaController {
     public ResponseEntity<List<Video>> findAllVideos() {
         try {
             List<Video> videos = culturemediaService.findAll();
+            if (videos.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
             return new ResponseEntity<>(videos, HttpStatus.OK);
         } catch (VideoNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
